@@ -1,14 +1,17 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './components/HomePage';
-import { NavBar } from './components';
+import { NavBar, Checkout, SearchResults, ProductPage } from './components';
 
 const App = () => {
   return (
     <BrowserRouter>
       <NavBar />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route exact path="/" element={<HomePage />} />
+        <Route path="/search" element={<SearchResults />} />
+        <Route path="/product/:id" element={<ProductPage />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </BrowserRouter>
   );
