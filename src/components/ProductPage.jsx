@@ -30,7 +30,7 @@ const ProductPage = () => {
           {/* Midlle */}
           <div className="col-span-5 p-4 rounded bg-white divide-y divide-gray-400">
             <div>
-              <ProductDetails product={product} ratings={false} />
+              <ProductDetails product={product} ratings={true} />
             </div>
             <div></div>
           </div>

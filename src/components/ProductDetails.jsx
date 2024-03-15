@@ -1,5 +1,6 @@
 import React from 'react';
 import ProductBadge from './ProductBadge';
+import ProductRating from './ProductRating';
 
 const ProductDetails = ({ product, ratings }) => {
   return (
@@ -7,8 +8,19 @@ const ProductDetails = ({ product, ratings }) => {
       <div className="text-xl xl:text-2xl font-medium mb-1">
         {product.title}
       </div>
-      <div className="text-sm xl:text-base mb-1">{product.brand}</div>
-      <div className="text-sm xl:text-base  mb-1">{product.avgRating}</div>
+      <div className="text-sm xl:text-base mb-1">
+        {' '}
+        by <span className="text-blue-500">{product.brand}</span>
+      </div>
+      {ratings && (
+        <div className="text-sm xl:text-base  mb-1">
+          {' '}
+          <ProductRating
+            avgRating={product.avgRating}
+            ratings={product.ratings}
+          />
+        </div>
+      )}
       <div className="text-xm xl:text-sm font-bold mb-1">
         {product.attribute}
       </div>
