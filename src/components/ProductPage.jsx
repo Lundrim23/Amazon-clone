@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { callAPI } from './utils/CallApi';
 import ProductDetails from './ProductDetails';
@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 const ProductPage = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
 
   const getProduct = () => {
@@ -19,7 +20,7 @@ const ProductPage = () => {
 
   useEffect(() => {
     getProduct();
-  }, [id]); // Add id as a dependency to refetch the product when the URL parameter changes
+  }, [id]);
 
   if (!product?.title) return <h1>Loading Product ...</h1>;
 
@@ -62,18 +63,25 @@ const ProductPage = () => {
             </div>
             <div className="text-base xl:text-lg mt-1">
               Quantity:
-              <select className="p-2 bg-white border rounded-md focus:border-indigo-600">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
+              <select
+                onChange={(e) => setQuantity(parseInt(e.target.value))}
+                className="p-2 bg-white border rounded-md focus:border-indigo-600"
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
               </select>
               <div>
-                <button
-                  onClick={() => dispatch(addToCart(product))} // Call the action creator with the product
-                  className="bg-yellow-400 w-full p-3 text-xl xl:text-2xl rounded hover:bg-yellow-500 mt-3"
-                >
-                  Add to cart
-                </button>
+                <Link to={'/checkout'}>
+                  <button
+                    onClick={() =>
+                      dispatch(addToCart({ ...product, quantity }))
+                    } // Pass the product with quantity to the action creator
+                    className="bg-yellow-400 w-full p-3 text-xl xl:text-2xl rounded hover:bg-yellow-500 mt-3"
+                  >
+                    Add to cart
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
