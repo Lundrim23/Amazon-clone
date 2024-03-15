@@ -3,10 +3,13 @@ import { useState, useEffect } from 'react';
 import { callAPI } from './utils/CallApi';
 import ProductDetails from './ProductDetails';
 import { GB_CURRENCY } from './utils/constants';
+import { addToCart } from '../redux/cartSlice';
+import { useDispatch } from 'react-redux';
 
 const ProductPage = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const dispatch = useDispatch();
 
   const getProduct = () => {
     callAPI(`data/products.json`).then((productResult) => {
@@ -16,7 +19,7 @@ const ProductPage = () => {
 
   useEffect(() => {
     getProduct();
-  }, []);
+  }, [id]); // Add id as a dependency to refetch the product when the URL parameter changes
 
   if (!product?.title) return <h1>Loading Product ...</h1>;
 
@@ -28,7 +31,7 @@ const ProductPage = () => {
           <div className="col-span-3 p-8 rounded bg-white m-auto">
             <img src={`${product.image}`} alt="ProductImage"></img>
           </div>
-          {/* Midlle */}
+          {/* Middle */}
           <div className="col-span-5 p-4 rounded bg-white divide-y divide-gray-400">
             <div>
               <ProductDetails product={product} ratings={true} />
@@ -65,7 +68,10 @@ const ProductPage = () => {
                 <option>3</option>
               </select>
               <div>
-                <button className="bg-yellow-400 w-full p-3 text-xl xl:text0sm rounded hover:bg-yellow-500 mt-3">
+                <button
+                  onClick={() => dispatch(addToCart(product))} // Call the action creator with the product
+                  className="bg-yellow-400 w-full p-3 text-xl xl:text-2xl rounded hover:bg-yellow-500 mt-3"
+                >
                   Add to cart
                 </button>
               </div>
