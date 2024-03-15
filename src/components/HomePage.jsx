@@ -60,6 +60,13 @@ function HomePage() {
         </div>
         <CarouselProduct />
         <CarousalCategory />
+        <div className="h-[200px]">
+          <img
+            className="h-[100%] m-auto"
+            src={'../images/banner_image.jpg'}
+            alt="banner"
+          />
+        </div>
       </div>
     </div>
   );
