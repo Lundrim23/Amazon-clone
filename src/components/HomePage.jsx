@@ -1,7 +1,8 @@
 import React from 'react';
 import Carousel from './Carousel';
 import HomePageCard from './HomePageCard';
-import CarousalCategory from './CarousalCategory';
+import CarousalCategory from './CarouselCategory';
+import CarouselProduct from './CarouselProduct';
 
 function HomePage() {
   return (
@@ -57,6 +58,7 @@ function HomePage() {
             ></img>
           </div>
         </div>
+        <CarouselProduct />
         <CarousalCategory />
       </div>
     </div>
