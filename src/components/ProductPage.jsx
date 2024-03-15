@@ -77,7 +77,7 @@ const ProductPage = () => {
                     onClick={() =>
                       dispatch(addToCart({ ...product, quantity }))
                     } // Pass the product with quantity to the action creator
-                    className="bg-yellow-400 w-full p-3 text-xl xl:text-2xl rounded hover:bg-yellow-500 mt-3"
+                    className="btn"
                   >
                     Add to cart
                   </button>
